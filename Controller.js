@@ -2,13 +2,13 @@ class Controller {
   constructor(model, view) {
     this.model = model;
     this.view = view;
+    this.score = 0;
   }
 
   async run() {
-    const listThemes = await this.model.readDirect();
+    const listThemes = await this.model.getThemes();
     let userThemes;
     // choosedThemes
-    let score = 0;
     // count
     do {
       userThemes = await this.view.showThemes(listThemes);
@@ -17,16 +17,18 @@ class Controller {
 
     const Questions = await this.model.getQuestions(userThemes);
     const Answerrr = await this.model.getAnswers(userThemes);
+    // console.log('ANSW -> ', Answerrr);
     for (let i = 0; i < Questions.length; i++) {
-      const quest = arrQuestion[i];
-      const userAnswer = await this.view.showQuestion(Questions);
-      this.view.showQuestion(userAnswer.toLowerCase() == Answerrr[i].toLowerCase(), Answerrr[i]);
-      if (userAnswer.toLowerCase() == Answerrr[i].toLowerCase()) {
-        score += 100;
+      const quest = Questions[i];
+      const userAnswer = await this.view.showQuestion(quest);
+      const res = this.view.showResult(userAnswer.toLowerCase() === Answerrr[i].toLowerCase(), Answerrr[i]);
+      if (res) {
+        this.score += 100;
       } else {
-        score -= 100;
+        this.score -= 100;
       }
     }
+    this.view.showFinal(this.score);
   }
   // for (let arrQuestion of Questions) {
   //     let userAnswer = await this.view.showQuestion(arrQuestion);
