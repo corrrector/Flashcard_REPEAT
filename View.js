@@ -1,24 +1,50 @@
-const readline = require('readline/promises');
-const { stdin: input, stdout: output } = require('process');
+const readline = require("readline").createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
 
 class View {
-  constructor() {
+  constructor() {}
 
+  getThemes(themeArr) {
+    return new Promise((resolve) => {
+      console.clear();
+      console.log("Здесь приветствие!!!");
+      console.log("\n");
+      console.log("Список тем:");
+      console.group();
+      console.log(
+        themeArr.forEach((theme, index) => `${index + 1}. ${theme}`).join("\n")
+      );
+      readline.question(`\nВыбери тему: `, (userAnswerTheme) => {
+        resolve(userAnswerTheme);
+        console.groupEnd();
+      });
+    });
   }
 
-  async showThemes(arr) {
-    arr.forEach((el, index) => {
-      console.log(`${index + 1}. ${el}`);
-    })
-    const rl = readline.createInterface({ input, output });
-    let answer = await question('Выбери тему:')
-    rl.close();
-    return answer;
-  };
-
-  async showQuestion(quest) {
-
+  showQuestion(strQuestion) {
+    return new Promise((resolve) => {
+      console.log(`\n${strQuestion}`);
+      readline.question(`\nВведи свой ответ: `, (userAnswerQuestion) => {
+        resolve(userAnswerQuestion);
+      });
+    });
   }
+
+
+
+  viewFinal(result) {
+    console.log(`\nПОЗДРАВЛЯЮ!\n 
+ИГРА ОКОНЧЕНА!`);
+    console.log(`\nТВОЙ РЕЗУЛЬТАТ: ${result} баллов!`);
+    readline.close()
+  }
+
 }
 
-module.exports = View
+//console.log(getThemes([ ‘Выдры‘, ‘Еноты‘, ‘Ночные Ястребы’ ]))
+
+module.exports = View;
+
+////////////////
