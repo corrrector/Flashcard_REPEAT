@@ -9,7 +9,7 @@ class View {
   getThemes(themeArr) {
     return new Promise((resolve) => {
       console.clear();
-      console.log("Здесь приветствие!!!");
+      console.log("Вcем приветик!!!");
       console.log("\n");
       console.log("Список тем:");
       console.group();
@@ -34,7 +34,7 @@ class View {
 
 
 
-  viewFinal(result) {
+  showFinal(result) {
     console.log(`\nПОЗДРАВЛЯЮ!\n 
 ИГРА ОКОНЧЕНА!`);
     console.log(`\nТВОЙ РЕЗУЛЬТАТ: ${result} баллов!`);
