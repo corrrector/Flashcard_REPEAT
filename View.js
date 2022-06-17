@@ -12,7 +12,11 @@ class View {
       console.log('              Список тем 🤑:            ');
       console.log('💕💕💕💕💕💕💕💕💕💕💕💕💕💕💕💕💕💕💕💕💕💕💕💕');
       console.group();
+
+
+
       console.log(arrThemes)
+
       // arrThemes.map((theme, index) => console.log(`${index + 1}. ${theme}`).join('\n'));
       readline.question('\nВыбери тему 😈😈😈: ', (userAnswerTheme) => {
         resolve(userAnswerTheme);
@@ -34,11 +38,13 @@ class View {
     if (booleanResult) {
       console.log('\n 🥳🥳🥳 Это правильный ответ! +100 баллов ');
       return true;
+
     } else {
       console.log('\n 🥲🥲🥲 Вы ответили неверно! -100 баллов ');
       console.log(`\n 🧠🧠🧠Правильный ответ: ${rightAnswer} `);
       return false;
     }
+
   }
 
   showFinal(result) {
