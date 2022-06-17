@@ -6,7 +6,7 @@ const readline = require("readline").createInterface({
 class View {
   constructor() {}
 
-  getThemes(themeArr) {
+  showThemes(themeArr) {
     return new Promise((resolve) => {
       console.clear();
       console.log("Вcем приветик!!!");
@@ -32,19 +32,20 @@ class View {
     });
   }
 
-
-
-  showFinal(result) {
-    console.log(`\nПОЗДРАВЛЯЮ!\n 
-ИГРА ОКОНЧЕНА!`);
-    console.log(`\nТВОЙ РЕЗУЛЬТАТ: ${result} баллов!`);
-    readline.close()
+  showResult(buleanResult, rightAnswer) {
+    if (buleanResult) {
+      console.log(`\n Это правильный ответ! +100 баллов `);
+    } else {
+      console.log(`\n Вы ответили неверно! -100 баллов `);
+      console.log(`\n Правильный ответ: ${rightAnswer} `);
+    }
   }
 
+  showFinal(result) {
+    console.log(`\nПОЗДРАВЛЯЮ!\nИГРА ОКОНЧЕНА!`);
+    console.log(`\nТВОЙ РЕЗУЛЬТАТ: ${result} баллов!`);
+    readline.close();
+  }
 }
 
-//console.log(getThemes([ ‘Выдры‘, ‘Еноты‘, ‘Ночные Ястребы’ ]))
-
 module.exports = View;
-
-////////////////
